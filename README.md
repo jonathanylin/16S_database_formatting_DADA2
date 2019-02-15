@@ -76,7 +76,7 @@ head(fasta)
 
           V1
 1 >UltBac92
-2 AUCCCUAGCUGGUCUGAGAGGAUGACCAGCCACACUGGAA...
+2 AGAUUUUGCUUUUGGCUCAGAUUGAACGCUGGCGGCAGGC...
 3 >UltBac89
 4 AGAGUUUCUUCCUGGCUCAGAUUGAACGCUGGCGGCAGGC...
 5 >UltBac90
@@ -125,7 +125,7 @@ combined$V2 <- NA
 for (i in taxonomy$V1) {
   for (ii in fasta$V1) {
     if (i == ii) {
-      combined$V1[which(taxonomy$V1 == i)] = paste(">", taxonomy$V2[which(taxonomy$V1 == i)], sep = "")
+      combined$V1[which(taxonomy$V1 == i)] = paste(">Bacteria;", taxonomy$V2[which(taxonomy$V1 == i)], sep = "")
       R = which(fasta$V1 == ii) + 1
       combined$V2[which(taxonomy$V1 == i)] = paste(fasta$V1[R], sep = "")
     }
@@ -142,12 +142,12 @@ This:
 head(combined)
 
                                                                                                 V1
-1 >Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
-2 >Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
-3 >Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
-4 >Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
-5 >Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
-6 >Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
+1 >Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
+2 >Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
+3 >Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
+4 >Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
+5 >Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
+6 >Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
                                                                                                 V2
 1 AGAUUUUGCUUUUGGCUCAGAUUGAACGCUGGCGGCAGGCCUAACACAUGCUUGUCGAACGGUAACAGGAAACAGCUUGCUGUUUCGCUGACGAGU...
 2 AGAGUUUCUUCCUGGCUCAGAUUGAACGCUGGCGGCAGGCCUAACACAUGCAAGUCGAACGGUAACAGGAAGCAGCUUGCUGCUUCGCUGACGAGU...
@@ -168,11 +168,11 @@ combined_fasta <- do.call(rbind, lapply(seq(nrow(combined)), function(i) t(combi
 head(combined_fasta)
 
     1                    
-V1 ">Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;"    
+V1 ">Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;"    
 V2 "AGAUUUUGCUUUUGGCUCAGAUUGAACGCUGGCGGCAGGCCUAACACAUGCUUGUCGAACGGUAACAGGAAACAGCUUGCUGUUUCGCUGACGAGUG..."
-V1 ">Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;" 
+V1 ">Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;" 
 V2 "AGAGUUUCUUCCUGGCUCAGAUUGAACGCUGGCGGCAGGCCUAACACAUGCAAGUCGAACGGUAACAGGAAGCAGCUUGCUGCUUCGCUGACGAGUG..."
-V1 ">Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;"
+V1 ">Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;"
 V2 "UGAACGCUGGCGGCAGGCCUAACACAUGCUUUGUCGAACGGUAACAGGAAGAAGCUUGCUUCUUUGCUGACGAGUGGCGGACGGGUGAGUAAUGUCU..."
 ```
 
@@ -185,11 +185,11 @@ write.table(combined_fasta, "DictDB_DADA2_FINAL.fasta", row.names = FALSE, col.n
 ```
 head -6 DictDB_DADA2_FINAL.fasta
 
->Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
+>Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
 AGAUUUUGCUUUUGGCUCAGAUUGAACGCUGGCGGCAGGCCUAACACAUGCUUGUCGAACGGUAACAGGAAACAGCUUGCUGUUUCGCUGACGAGUG...
->Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
+>Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
 AGAGUUUCUUCCUGGCUCAGAUUGAACGCUGGCGGCAGGCCUAACACAUGCAAGUCGAACGGUAACAGGAAGCAGCUUGCUGCUUCGCUGACGAGUG...
->Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
+>Bacteria;Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
 UGAACGCUGGCGGCAGGCCUAACACAUGCUUUGUCGAACGGUAACAGGAAGAAGCUUGCUUCUUUGCUGACGAGUGGCGGACGGGUGAGUAAUGUCU...
 ```
 
