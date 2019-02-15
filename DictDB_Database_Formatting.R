@@ -24,7 +24,7 @@ combined$V2 <- NA
 for (i in taxonomy$V1) {
   for (ii in fasta$V1) {
     if (i == ii) {
-      combined$V1[which(taxonomy$V1 == i)] = paste(">", taxonomy$V2[which(taxonomy$V1 == i)], sep = "")
+      combined$V1[which(taxonomy$V1 == i)] = paste(">Bacteria;", taxonomy$V2[which(taxonomy$V1 == i)], sep = "")
       R = which(fasta$V1 == ii) + 1
       combined$V2[which(taxonomy$V1 == i)] = paste(fasta$V1[R], sep ="")
     }
