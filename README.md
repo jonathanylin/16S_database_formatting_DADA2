@@ -1,4 +1,4 @@
-## Formatting a custom 16S sequence databases for use in DADA2
+## Formatting a custom 16S sequence database for use in DADA2
 This script uses R to modify a custom-curated sequence database (DictDB) into a training fasta file appropriate for assignTaxnomy in DADA2
 
 I will be using a termite-specific curated database called [DictDB](https://www.sciencedirect.com/science/article/pii/S0723202015001162) to classify and assign taxonomy for my termite 16S reads. This database improves taxonomy assignments for termite gut 16S rRNA gene sequences compared to the standard training sets from SILVA or RDP.
