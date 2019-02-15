@@ -57,7 +57,7 @@ head -6 DictDB_V3_modified.taxonomy
 >UltBac55    Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
 ```
 
-With the ">" in front of both taxa id strings, this will allow us to to do string matching. It also preserves the fasta format later on.
+With the ">" in front of both taxa id strings, this will allow us to to do string matching. It also preserves the fasta format for later on.
 
 #### Load libraries in R, set directory, and read in fasta and taxonomy files as dataframes:
 ```{r}
@@ -100,7 +100,7 @@ head(taxonomy)
 6 Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;
 ```
 
-Note that for the dataframe of the fasta file, the taxa id and accompanying sequence are read in the same column, but as separate rows. In the taxonomy dataframe, the taxa id and matching taxonomy string are on the same rows in two different columns.
+Note that in the dataframe of the fasta file, the taxa id and accompanying sequence are in the same column, but separated in different rows. In the taxonomy dataframe, the taxa id and matching taxonomy string are on the same rows across two different columns.
 
 The assignTaxonomy() command in DADA2 expects a fasta training file in the following format:
 
@@ -127,14 +127,14 @@ for (i in taxonomy$V1) {
     if (i == ii) {
       combined$V1[which(taxonomy$V1 == i)] = paste(">", taxonomy$V2[which(taxonomy$V1 == i)], sep = "")
       R = which(fasta$V1 == ii) + 1
-      combined$V2[which(taxonomy$V1 == i)] = paste(fasta$V1[R], sep ="")
+      combined$V2[which(taxonomy$V1 == i)] = paste(fasta$V1[R], sep = "")
     }
   }
 }
 ```
-This script:
+This:
 - Iterates through the taxonomy and fasta files and pastes the matching taxa id, with a ">", into the new dataframe "combined"
-- Pastes the matching sequence for each taxa string to second column (same row) in the dataframe "combined"
+- Pastes the matching sequence for each taxa string to a second column (same row) in the dataframe "combined"
 - Takes ~ 1 hour to iterate through 55,000+ lines
 
 #### View combined dataframe:
@@ -167,7 +167,7 @@ combined_fasta <- do.call(rbind, lapply(seq(nrow(combined)), function(i) t(combi
 
 head(combined_fasta)
 
-    1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+    1                    
 V1 ">Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;"    
 V2 "AGAUUUUGCUUUUGGCUCAGAUUGAACGCUGGCGGCAGGCCUAACACAUGCUUGUCGAACGGUAACAGGAAACAGCUUGCUGUUUCGCUGACGAGUG..."
 V1 ">Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;Escherichia-Shigella;" 
@@ -176,7 +176,7 @@ V1 ">Proteobacteria;Gammaproteobacteria_1;Enterobacteriales;Enterobacteriaceae;E
 V2 "UGAACGCUGGCGGCAGGCCUAACACAUGCUUUGUCGAACGGUAACAGGAAGAAGCUUGCUUCUUUGCUGACGAGUGGCGGACGGGUGAGUAAUGUCU..."
 ```
 
-You can see now that the taxa strings and matching sequences are now all in the same columns. Now we can export the reformatted dataframe as a fasta file:
+You can see that the taxa strings and matching sequences are now all in the same columns. Now we can export the reformatted dataframe as a fasta file:
 ```{r}
 write.table(combined_fasta, "DictDB_DADA2_FINAL.fasta", row.names = FALSE, col.names = FALSE, quote = FALSE)
 ```
